@@ -33,6 +33,7 @@ export const HomePage = () => {
       dispatch(loadCountries());
     }
   }, [qty, dispatch]);
+  console.log(status);
 
   return (
     <>

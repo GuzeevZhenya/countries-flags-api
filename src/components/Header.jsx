@@ -40,7 +40,7 @@ const ModeSwitcher = styled.div`
 export const Header = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.mainTheme);
-  console.log(theme);
+
 
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
