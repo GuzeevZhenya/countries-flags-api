@@ -8,7 +8,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { configurateStore } from "./store/store";
 const store = configurateStore();
-console.log(store);
+ 
 
 ReactDOM.render(
   <React.StrictMode>
