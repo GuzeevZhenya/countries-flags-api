@@ -1,12 +1,14 @@
 const initialState = {
-  mainTheme: "light",
+  themeColor: "light",
 };
 
 export const themeReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_THEME":
+      console.log(action);
       return {
-        mainTheme: action.theme,
+        ...state,
+        themeColor: action.payload,
       };
 
     default:
@@ -14,7 +16,10 @@ export const themeReducer = (state = initialState, action) => {
   }
 };
 
-export const setTheme = (theme) => ({
-  type: "SET_THEME",
-  theme,
-});
+export const setTheme = (theme) => {
+  console.log(theme);
+  return {
+    type: "SET_THEME",
+    payload: theme,
+  };
+};

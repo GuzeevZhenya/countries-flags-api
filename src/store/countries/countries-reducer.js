@@ -1,18 +1,18 @@
 const initialState = {
+  countries: [],
   status: "idle",
   error: null,
-  list: [],
 };
 
 export const countriesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_COUNTRIES": {
+    case "SET_COUNTRIES":
       return {
         ...state,
+        countries: action.countries,
         status: "received",
-        list: action.countries,
       };
-    }
+
     case "SET_LOADING": {
       return {
         ...state,
@@ -20,7 +20,6 @@ export const countriesReducer = (state = initialState, action) => {
         error: null,
       };
     }
-
     case "SET_ERROR": {
       return {
         ...state,
@@ -33,25 +32,27 @@ export const countriesReducer = (state = initialState, action) => {
   }
 };
 
-const setCountries = (countries) => ({
-  type: "SET_COUNTRIES",
-  countries,
-});
+export const setCountries = (countries) => {
+  console.log(countries);
+  return {
+    type: "SET_COUNTRIES",
+    countries,
+  };
+};
 
-const setLoading = () => ({
+export const setLoading = () => ({
   type: "SET_LOADING",
 });
 
-const setError = (error) => ({
+export const setError = (error) => ({
   type: "SET_ERROR",
   error,
 });
 
-export const loadCountries =
+export const countriesTC =
   () =>
   (dispatch, getState, { client, api }) => {
     dispatch(setLoading());
-
     client
       .get(api.ALL_COUNTRIES)
       .then(({ data }) => dispatch(setCountries(data)))

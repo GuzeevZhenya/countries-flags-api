@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
 
 import { Container } from "./Container";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setTheme } from "../store/theme/theme-reducer";
-import { clearControls } from "../store/controls/controls-reducer";
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -38,33 +38,30 @@ const ModeSwitcher = styled.div`
 `;
 
 export const Header = () => {
-  const dispatch = useDispatch();
-  const theme = useSelector((state) => state.theme.mainTheme);
+  // const theme = "light";
 
+  const theme = useSelector((state) => state.theme.themeColor);
+  const dispatch = useDispatch();
+
+  const themeSwither = () => {
+    dispatch(setTheme(theme === "light" ? "dark" : "light"));
+  };
 
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const themeChanger = () => {
-    dispatch(setTheme(theme === "light" ? "dark" : "light"));
-  };
-
-  const cleanUp = () => {
-    dispatch(clearControls());
-  };
-
   return (
     <HeaderEl>
       <Container>
         <Wrapper>
-          <Title onClick={cleanUp}>Where is the world?</Title>
-          <ModeSwitcher onClick={themeChanger}>
+          <Title>Where is the world?</Title>
+          <ModeSwitcher onClick={themeSwither}>
             {theme === "light" ? (
               <IoMoonOutline size="14px" />
             ) : (
               <IoMoon size="14px" />
-            )}{" "}
+            )}
             <span style={{ marginLeft: "0.75rem" }}>{theme} Theme</span>
           </ModeSwitcher>
         </Wrapper>

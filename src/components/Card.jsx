@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
 const Wrapper = styled.article`
   border-radius: var(--radii);
   background-color: car(--colors-ui-base);
