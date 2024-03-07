@@ -31,21 +31,19 @@ export const Controls = () => {
   const dispatch = useDispatch();
   const region = useSelector(selectRegion);
 
-  console.log(region);
-
   const selectHandler = (reg) => {
     dispatch(setRegion(reg?.value || ""));
   };
 
   return (
-    <Wrapper>
+    <Wrapper> 
       <Search />
       <CustomSelect
         options={options}
         placeholder="Filter by Region"
         isClearable
         isSearchable={false}
-        value={optionsMap[region]}
+        value={optionsMap[region] || ""}
         onChange={selectHandler}
       />
     </Wrapper>
