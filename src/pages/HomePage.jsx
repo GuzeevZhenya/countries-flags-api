@@ -7,17 +7,25 @@ import { Card } from "../components/Card";
 import { Controls } from "../components/Controls";
 import { useEffect } from "react";
 import {
-  selectAllCountries,
   selectCountriesInfo,
+  selectFilteredCountries,
 } from "../store/countries/countries-selectors";
+import {
+  selectRegion,
+  selectSearch,
+} from "../store/controls/controls-selectros";
 
 export const HomePage = () => {
   const navigate = useNavigate();
-  const countries = useSelector(selectAllCountries);
+  const search = useSelector(selectSearch);
+  const region = useSelector(selectRegion);
+  const countries = useSelector((state) =>
+    selectFilteredCountries(state, { search, region })
+  );
+
   const { status, error, qty } = useSelector(selectCountriesInfo);
   const dispatch = useDispatch();
 
-  console.log(countries);
   useEffect(() => {
     if (!qty) {
       dispatch(countriesTC());

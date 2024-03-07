@@ -10,6 +10,15 @@ export const controlsReducer = (state = initialState, action) => {
         ...state,
         search: action.search,
       };
+
+    case "SET_REGION":
+      return {
+        ...state,
+        region: action.region,
+      };
+
+    case "CLEAR_CONTROLS":
+      return initialState;
     default:
       return state;
   }
@@ -18,4 +27,13 @@ export const controlsReducer = (state = initialState, action) => {
 export const setSearch = (search) => ({
   type: "SET_SEARCH",
   search,
+});
+
+export const setRegion = (region) => ({
+  type: "SET_REGION",
+  region,
+});
+
+export const setClear = () => ({
+  type: "CLEAR_CONTROLS",
 });

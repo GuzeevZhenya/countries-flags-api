@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 import { IoSearch } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSearch } from "../store/controls/controls-selectros";
+import {
+  selectSearch,
+  selectFilteredCountries,
+} from "../store/controls/controls-selectros";
 import { setSearch } from "../store/controls/controls-reducer";
 
 const InputContainer = styled.label`

@@ -33,7 +33,6 @@ export const countriesReducer = (state = initialState, action) => {
 };
 
 export const setCountries = (countries) => {
-  console.log(countries);
   return {
     type: "SET_COUNTRIES",
     countries,
