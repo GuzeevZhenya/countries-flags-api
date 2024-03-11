@@ -10,8 +10,8 @@ export const detailsReducer = (state = initialState, action) => {
     case "details/SET_LOADING":
       return {
         ...state,
-        status: "loading",
         error: null,
+        status: "loading",
       };
 
     case "details/SET_ERROR":
@@ -29,9 +29,7 @@ export const detailsReducer = (state = initialState, action) => {
       };
 
     case "details/CLEAR_DETAILS":
-      return {
-        initialState,
-      };
+      return initialState;
 
     case "details/SET_NEIGHBORS":
       return {
@@ -69,21 +67,41 @@ export const setNeighbors = (neighbors) => {
   };
 };
 
+// export const loadCountryByName =
+//   (name) =>
+//   (dispatch, _, { api, client }) => {
+//     dispatch(setLoading());
+//     client
+//       .get(api.searchByCountry(name))
+//       .then(({ data }) => dispatch(setCountries(data[0])))
+//       .catch((err) => dispatch(setError(err.message)));
+//   };
+
 export const loadCountryByName =
   (name) =>
-  (dispatch, _, { api, client }) => {
+  (dispatch, _, { client, api }) => {
     dispatch(setLoading());
+
     client
       .get(api.searchByCountry(name))
       .then(({ data }) => dispatch(setCountries(data[0])))
       .catch((err) => dispatch(setError(err.message)));
   };
 
+// export const loadNeighborsByBorder =
+//   (borders) =>
+//   (dispatch, _, { api, client }) => {
+//     client
+//       .get(api.filterByCode(borders))
+//       .then(({ data }) => dispatch(setNeighbors(data.map((el) => el.name))))
+//       .catch((err) => dispatch(setError(err.message)));
+//   };
+
 export const loadNeighborsByBorder =
   (borders) =>
-  (dispatch, _, { api, client }) => {
+  (dispatch, _, { client, api }) => {
     client
       .get(api.filterByCode(borders))
-      .then(({ data }) => dispatch(setNeighbors(data.map((el) => el.name))))
-      .catch((err) => dispatch(setError(err.message)));
+      .then(({ data }) => dispatch(setNeighbors(data.map((c) => c.name))))
+      .catch(console.error);
   };

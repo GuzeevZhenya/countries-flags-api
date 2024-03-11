@@ -19,22 +19,23 @@ export const Details = () => {
   const { currentCountry, error, status } = useSelector(
     (state) => state.details
   );
-  console.log(currentCountry);
 
   useEffect(() => {
     dispatch(loadCountryByName(name));
+
     return () => {
       dispatch(clearDetails());
-    };
+    }
   }, [name, dispatch]);
+
 
   return (
     <div>
       <Button onClick={() => navigate(-1)}>
         <IoArrowBack /> Back
       </Button>
-      {status === "loading" && <h2>Loading...</h2>}
-      {error && <h2>Error</h2>}
+      {status === 'loading' && <h2>Loading...</h2>}
+      {error && <h2>{error}</h2>}
       {currentCountry && <Info push={navigate} {...currentCountry} />}
     </div>
   );
